@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:myportofolio_mobile/widgets/left_drawer.dart';
+import 'package:myportofolio_mobile/widgets/project_card.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
@@ -15,24 +17,27 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Scaffold menyediakan struktur visual dasar halaman.
     return Scaffold(
-      // AppBar menampilkan bar bagian atas halaman aplikasi.
+      // AppBar
       appBar: AppBar(
         title: const Text(
           'MyPortfolio',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
 
-      // Body halaman utama.
+      // Drawer Menu
+      drawer: const LeftDrawer(),
+
+      // Body halaman utama
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Menampilkan 3 InfoCard secara sejajar.
+            // Informasi pemilik portfolio
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -44,7 +49,7 @@ class MyHomePage extends StatelessWidget {
 
             const SizedBox(height: 16.0),
 
-            // Pesan sambutan dan menu portofolio.
+            // Pesan sambutan dan menu portfolio
             Center(
               child: Column(
                 children: [
@@ -59,7 +64,7 @@ class MyHomePage extends StatelessWidget {
                     ),
                   ),
 
-                  // GridView untuk menampilkan tombol menu.
+                  // GridView untuk menampilkan tombol menu
                   GridView.count(
                     primary: true,
                     padding: const EdgeInsets.all(20),
@@ -81,7 +86,7 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-// Widget kartu informasi pemilik.
+// Widget kartu informasi pemilik
 class InfoCard extends StatelessWidget {
   final String title;
   final String content;
@@ -107,54 +112,11 @@ class InfoCard extends StatelessWidget {
   }
 }
 
-// Model data tombol homepage.
+// Model data tombol homepage
 class ItemHomepage {
   final String name;
   final IconData icon;
   final Color color;
 
   ItemHomepage(this.name, this.icon, this.color);
-}
-
-// Widget kartu tombol aksi.
-class ItemCard extends StatelessWidget {
-  final ItemHomepage item;
-
-  const ItemCard(this.item, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: item.color, //mengganti color dari secondari jadi berdasarkan variabel color nya
-      borderRadius: BorderRadius.circular(12),
-      child: InkWell(
-        onTap: () {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                content: Text("Kamu telah menekan tombol ${item.name}!"),
-              ),
-            );
-        },
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(item.icon, color: Colors.white, size: 30.0),
-                const Padding(padding: EdgeInsets.all(3)),
-                Text(
-                  item.name,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 }
