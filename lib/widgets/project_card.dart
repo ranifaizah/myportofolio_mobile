@@ -14,7 +14,7 @@ class ItemCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         onTap: () {
-          // Memunculkan SnackBar ketika diklik
+          // Menampilkan notifikasi ketika kartu ditekan
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
@@ -23,7 +23,7 @@ class ItemCard extends StatelessWidget {
               ),
             );
 
-          // Navigasi ke halaman yang sesuai
+          // Navigasi ke halaman formulir
           if (item.name == "Tambah Proyek") {
             Navigator.push(
               context,
@@ -31,6 +31,7 @@ class ItemCard extends StatelessWidget {
             );
           }
         },
+
         child: Container(
           padding: const EdgeInsets.all(8),
           child: Center(
